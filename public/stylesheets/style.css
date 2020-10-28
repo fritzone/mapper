@@ -1,0 +1,40 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+
+#leftdiv {
+  width: 20%; 
+  height: 100%;
+  float: left; 
+  background-color:gainsboro;
+}
+
+#descdiv {
+  width: 20%; 
+  height: 100%;
+  float: right; 
+  background-color:moccasin;
+  display: none; 
+}
+
+#mapid {
+  width: 80%; 
+  height: 100%;
+  float: left;  
+}
+
+#descdiv-adm {
+  width: 20%; 
+  height: 100%;
+  float: left; 
+  background-color:moccasin;
+}
+
+.building_row {
+  height: 40px;
+}

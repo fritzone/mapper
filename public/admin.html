@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Then and now</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+	<link rel="stylesheet" href="stylesheets/style.css">
+
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+	<script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+</head>
+<body>
+
+	<div style="width: 100%; height: 100%; position: fixed; ">
+			<div id="leftdiv">
+				<table id="building_list" width="100%">
+					<tbody>
+
+				</table>
+			</div>
+			<div id="mapid" style="width: 60%;"></div>
+			<div id="descdiv-adm"></div>
+	</div>
+	<script src="map.js"></script>
+	<script src="client.js"></script>
+	<script src="places.js"></script>
+	<script>
+		var rows = []
+		var glayers = {}
+		function row_mouse_move(i)
+		{
+			var o = rows[i-1]
+			console.log(o)
+			console.log(o.p)
+			document.getElementById(o.p).style.background='#f1f1f1';
+			var gla = glayers[o.p]
+			var v = gla.getLayer(o.p);
+			console.log(v)
+
+			// now see how the v will have its mouse over
+		}
+
+		function row_mouse_out(row, pid)
+		{
+			console.log(pid)
+			row.style.background='gainsboro';
+		}
+
+		function location_got(building, polyid)
+		{
+			var o2s = {p:polyid};
+			rows.push(o2s)
+
+			var trow = "<tr><td class='building_row' id='" + polyid + "' " +
+				"onMouseOver='row_mouse_move( rows.length );' onMouseOut='row_mouse_out(this, polyid);'>" + 
+				building["properties"]["name"] + 
+				"</td></tr>";
+			$('#building_list').append(trow);
+		}
+
+		function location_click(building)
+		{
+
+		}
+
+		load_locations(location_got, location_click);
+	</script>
+
+</body>
+</html>
